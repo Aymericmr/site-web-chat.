@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Chat qui fait caca 🐱💩</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9ff3, #a29bfe);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: "Comic Sans MS", cursive;
+      overflow: hidden;
+      color: white;
+      position: relative;
+      cursor: url('https://example.com/rouleau-papier-toilette.png'), auto;
+      transition: transform 1s ease-in-out;
+    }
+
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    #cat {
+      width: 250px;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+      border-radius: 20px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    #cat:hover {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 18px;
+      text-align: center;
+      font-weight: bold;
+      color: white;
+      letter-spacing: 1px;
+    }
+
+    #secret-button {
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      position: absolute;
+      bottom: 20px;
+      left: calc(50% + 100px);
+      width: 50px;
+      height: 30px;
+      opacity: 0;
+    }
+
+    #message {
+      display: none;
+      font-size: 32px;
+      font-weight: bold;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      color: white;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 9999;
+      font-family: "Comic Sans MS", cursive;
+      text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    }
+
+    #close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 32px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    @keyframes confetti {
+      0% { top: -10%; opacity: 1; }
+      100% { top: 100%; opacity: 0; }
+    }
+
+    .confetti {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      opacity: 0.9;
+      animation: confetti 4s linear infinite;
+    }
+
+    #prout {
+      color: yellow;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    #secret-message {
+      display: none;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    @keyframes flash {
+      0% { background-color: rgba(255, 0, 0, 1); }
+      25% { background-color: rgba(255, 255, 0, 1); }
+      50% { background-color: rgba(0, 255, 0, 1); }
+      75% { background-color: rgba(0, 0, 255, 1); }
+      100% { background-color: rgba(255, 0, 0, 1); }
+    }
+
+    .flash-effect {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      animation: flash 1s linear infinite;
+      z-index: 9998;
+      opacity: 0.7;
+    }
+
+    .poo-trail {
+      position: absolute;
+      font-size: 24px;
+      color: #ff6347;
+      z-index: 9999;
+      pointer-events: none;
+      animation: poopAnimation 1s forwards;
+    }
+
+    @keyframes poopAnimation {
+      0% {
+        transform: scale(0.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0;
+      }
+    }
+
+    /* Bouton mode cinéma */
+    #cinema-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff6347;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    #cinema-button:hover {
+      background-color: #ff4500;
+    }
+
+    /* Effet cinéma : rotation complète de la page */
+    .cinema-mode {
+      transform: rotateY(360deg); /* Rotation complète de 360 degrés */
+      transform-origin: center;
+      transition: transform 2s ease-in-out; /* Durée et lissage de la rotation */
+    }
+
+    /* Nouvelle animation pour fiesta */
+    @keyframes bounce {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-50px, -50px); }
+      50% { transform: translate(50px, 50px); }
+      75% { transform: translate(-50px, 50px); }
+      100% { transform: translate(50px, -50px); }
+    }
+
+    /* Célébration Fiesta : appliquer l'animation de rebond */
+    .fiesta-mode {
+      position: absolute;
+      animation: bounce 0.5s infinite alternate;
+    }
+
+    /* Bouton Fiesta */
+    #fiesta-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 18px;
+      background-color: #ff6347;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      color: white;
+      transition: background-color 0.3s ease;
+    }
+
+    #fiesta-button:hover {
+      background-color: #ff4500;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 style="font-size: 40px; text-shadow: 0 0 20px rgba(0,0,0,0.5);">
+    Click sur le chat pour un concert de <span id="prout">prouts 🚨</span>
+  </h1>
+
+  <img id="cat" src="https://cdn.pixabay.com/photo/2017/11/09/21/41/cat-2934720_1280.jpg" alt="Chat rigolo">
+
+  <button id="cinema-button">Activer le mode Cinéma</button>
+  <button id="fiesta-button">Fiesta 🎉</button>
+
+  <audio id="fart-sound" src="https://www.myinstants.com/media/sounds/fart-with-reverb.mp3"></audio>
+
+  <footer>
+    Fait par Aymericmr
+  </footer>
+
+  <button id="secret-button" onclick="activateSecret()"></button>
+
+  <div id="message">
+    <button id="close-btn" onclick="closeSecret()">✖</button>
+    Bravo, tu as gagné une photo de mes pieds 🎉🎉🎉
+  </div>
+
+  <div id="confetti-container"></div>
+
+  <div id="secret-message">
+    <h2>Tu as trouvé le secret ! 🎉</h2>
+    <p>Entrez le mot de passe pour découvrir le secret :</p>
+    <input type="password" id="password-input" placeholder="Mot de passe" />
+    <button onclick="checkPassword()">Valider</button>
+    <p id="password-response"></p>
+  </div>
+
+  <script>
+    const cat = document.getElementById("cat");
+    const fart = document.getElementById("fart-sound");
+    const message = document.getElementById("message");
+    const confettiContainer = document.getElementById("confetti-container");
+    const proutWord = document.getElementById("prout");
+    const secretMessage = document.getElementById("secret-message");
+    const passwordInput = document.getElementById("password-input");
+    const passwordResponse = document.getElementById("password-response");
+    const cinemaButton = document.getElementById("cinema-button");
+    const fiestaButton = document.getElementById("fiesta-button");
+    
+    let cinemaModeActive = false;
+    let fiestaModeActive = false;
+
+    // Activer le mode cinéma
+    cinemaButton.addEventListener("click", () => {
+      cinemaModeActive = true;
+      activateCinemaMode();
+    });
+
+    function activateCinemaMode() {
+      document.body.classList.add("cinema-mode");
+
+      // Ajouter un mouvement aléatoire aux éléments
+      const elements = document.querySelectorAll("body *");
+      elements.forEach(element => {
+        element.style.position = "absolute";
+        element.style.left = `${Math.random() * 100}vw`;
+        element.style.top = `${Math.random() * 100}vh`;
+        element.style.transform = `rotate(${Math.random() * 360}deg)`;
+        element.style.transition = "all 0.5s ease-out";
+      });
+    }
+
+    // Activer le mode fiesta
+    fiestaButton.addEventListener("click", () => {
+      fiestaModeActive = true;
+      activateFiestaMode();
+    });
+
+    function activateFiestaMode() {
+      const elements = document.querySelectorAll("body *");
+      elements.forEach(element => {
+        const randomX = Math.random() * 100 + "vw"; // Position aléatoire
+        const randomY = Math.random() * 100 + "vh"; // Position aléatoire
+        const randomDelay = Math.random() * 2 + "s"; // Délai aléatoire
+        const randomDuration = Math.random() * 3 + 2 + "s"; // Durée aléatoire
+
+        // Ajout de l'animation de rebond
+        element.classList.add("fiesta-mode");
+        element.style.left = randomX;
+        element.style.top = randomY;
+        element.style.animationDelay = randomDelay;
+        element.style.animationDuration = randomDuration;
+      });
+    }
+
+    // Désactiver le mode Fiesta avec la touche AltGr
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "AltGraph") {
+        fiestaModeActive = false;
+        const elements = document.querySelectorAll("body *");
+        elements.forEach(element => {
+          element.classList.remove("fiesta-mode");
+        });
+      }
+
+      if (e.key === "Tab" && cinemaModeActive) {
+        // Réinitialiser tout à sa position originale
+        cinemaModeActive = false;
+        document.body.classList.remove("cinema-mode");
+
+        const elements = document.querySelectorAll("body *");
+        elements.forEach(element => {
+          element.style.position = "";
+          element.style.left = "";
+          element.style.top = "";
+          element.style.transform = "";
+          element.style.transition = "all 1s ease-in-out";
+        });
+      }
+    });
+
+    cat.addEventListener("click", () => {
+      fart.currentTime = 0;
+      fart.play();
+    });
+
+    proutWord.addEventListener("click", () => {
+      secretMessage.style.display = "block";
+      showConfetti();
+    });
+
+    function activateSecret() {
+      message.style.display = 'flex';
+      showConfetti();
+    }
+
+    function closeSecret() {
+      message.style.display = 'none';
+      confettiContainer.innerHTML = '';
+    }
+
+    function checkPassword() {
+      const enteredPassword = passwordInput.value;
+      if (enteredPassword === "21092010") {
+        passwordResponse.textContent = "Mot de passe correct ! 🎉🎉🎉 Voici ton secret : Félicitations !";
+        // Ajouter un effet de flash
+        document.body.classList.add('flash-effect');
+        // Lancer la redirection après 10 secondes
+        setTimeout(() => {
+          window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"; // Vidéo YouTube
+        }, 10000);
+      } else {
+        passwordResponse.textContent = "Mot de passe incorrect. Essaie encore !";
+      }
+    }
+
+    function showConfetti() {
+      confettiContainer.innerHTML = '';
+      const colors = ['#ff6347', '#feca57', '#1dd1a1', '#54a0ff', '#5f27cd', '#ff9f43'];
+
+      for (let i = 0; i < 150; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.top = '-10px';
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confettiContainer.appendChild(confetti);
+      }
+    }
+  </script>
+
+</body>
+</html>
